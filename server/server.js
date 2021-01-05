@@ -23,10 +23,32 @@ app.get('/artist', (req, res) => {
     });
 });
 
+// /artist routes
 app.post('/artist', (req, res) => {
-	
-})
+  let newArtist = req.body;
 
+  const queryText = `
+		INSERT INTO "artist" ("name", "birthdate")
+		VALUES ($1, $2);
+	`;
+
+  pool
+    .query(queryText, [newArtist.name, newArtist.birthdate])
+    .then((result) => {
+      console.log(result);
+      res.sendStatus(201);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
+
+// /song routes
+
+
+
+// app listen
 app.listen(PORT, () => {
   console.log('listening on port', PORT);
 });
