@@ -9,12 +9,13 @@ app.use(express.static('server/public'));
 
 app.get('/artist', (req, res) => {
   const queryText = `
-		SELECT * FROM "artist" ORDER BY "birthdate" DESC
+		SELECT * FROM "artist" ORDER BY "birthdate" DESC;
 	`;
 
   pool
     .query(queryText)
     .then((result) => {
+      console.log(result.rows);
       res.send(result.rows);
     })
     .catch((error) => {
@@ -45,8 +46,42 @@ app.post('/artist', (req, res) => {
 });
 
 // /song routes
+app.get('/song', (req, res) => {
+  const queryText = `
+		SELECT * FROM "song" ORDER BY "title";
+	`;
 
+  pool
+    .query(queryText)
+    .then((result) => {
+      console.log(result.rows);
+      res.send(result.rows);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
 
+app.post('/song', (req, res) => {
+  let newSong = req.body;
+
+  const queryText = `
+		INSERT INTO "song" ("title", "length", "released")
+		VALUES ($1, $2, $3);
+	`;
+
+  pool
+    .query(queryText, [newSong.title, newSong.length, newSong.released])
+    .then((result) => {
+      console.log(result);
+      res.sendStatus(201);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
 
 // app listen
 app.listen(PORT, () => {
