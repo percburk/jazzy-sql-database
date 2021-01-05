@@ -38,7 +38,7 @@ Using the ERD above:
 
 ### Update the Server-side Code
 
-- [ ] Install `pg` and setup your `pool` to connect to the database.
+- [x] Install `pg` and setup your `pool` to connect to the database.
 - [ ] Update the `\artist` GET route to get data from the database. Sort the data by birthdate, youngest to oldest.
 - [ ] Update the `\artist` POST route to store data in the database. 
 - [ ] Update the `\song` GET route to get data from the database. Sort the data by title.
@@ -48,6 +48,6 @@ Using the ERD above:
 
 ## Stretch
 
-- [ ] Move the `pool` configuration out of `server.js` and into a `pool.js` module file.
+- [x] Move the `pool` configuration out of `server.js` and into a `pool.js` module file.
 - [ ] Move the `\artist` routes to an artist router file. 
 - [ ] Move the `\song` routes to a song router file.
